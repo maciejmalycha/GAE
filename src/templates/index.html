@@ -1,8 +1,10 @@
 <html>
     <body>
-        <h1>Hello {{ who }}!</h1>
+        {% for signature in signatures %}
+        <div>{{ signature.imie }} signed the petition</div>
+        {% endfor %}
         <form action="/" method="post">
-            Imię: <input type="text" name="imie" />
+            Name: <input type="text" name="imie" />
             <input type="submit" name="submit" />
         </form>
     </body>
