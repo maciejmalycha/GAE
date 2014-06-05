@@ -1,6 +1,7 @@
 import os.path
 import webapp2
 import jinja2
+import logging
 
 from google.appengine.ext.webapp.util import run_wsgi_app
 
@@ -13,6 +14,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 
 class MainPage(webapp2.RequestHandler):
     def get(self):
+        logging.debug("MainPage.get called")
         template = JINJA_ENVIRONMENT.get_template("index.html")
         context = { 'who' : 'Bydgoszcz'}
         self.response.write(template.render(context))
@@ -23,6 +25,8 @@ application = webapp2.WSGIApplication([
 ], debug=True)
 
 def main():
+    # Call dev_appserver.py with option --log_level debug to see log below INFO
+    logging.getLogger().setLevel(logging.DEBUG)
     run_wsgi_app(application)
 
 if __name__ == '__main__':
