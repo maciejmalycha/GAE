@@ -19,6 +19,12 @@ class MainPage(webapp2.RequestHandler):
         context = { 'who' : 'Bydgoszcz'}
         self.response.write(template.render(context))
 
+    def post(self):
+        logging.debug("MainPage.post called")
+        template = JINJA_ENVIRONMENT.get_template("index.html")
+        context = { 'who' : self.request.get('imie') }
+        self.response.write(template.render(context))
+
 
 application = webapp2.WSGIApplication([
     ('/', MainPage),
